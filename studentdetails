@@ -7,7 +7,7 @@ con = mysql.connector.connect(host= 'localhost',user="root", password="Vig0310",
 def insert(reno,name,age,address,dob):
     res = con.cursor()
     sql = "insert into users (reno,name,age,address,dob) values (%s,%s,%s,%s,%s)"
-    user = (reno,name,age,address,dob)
+    user = (reno,name,ge,address,dob)
     res.execute(sql, user)
     con.commit()
     print("Data Insert Success")
