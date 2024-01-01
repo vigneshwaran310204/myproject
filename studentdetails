@@ -1,1 +1,76 @@
 
+import mysql.connector
+con = mysql.connector.connect(host= 'localhost',user="root", password="Vig0310",port='3306')
+
+
+
+def insert(reno,name,age,address,dob):
+    res = con.cursor()
+    sql = "insert into users (reno,name,age,address,dob) values (%s,%s,%s,%s,%s)"
+    user = (reno,name,age,address,dob)
+    res.execute(sql, user)
+    con.commit()
+    print("Data Insert Success")
+
+
+def update(reno,name,age,address,dob):
+    res = con.cursor()
+    sql = "update users set name=%s,age=%s,address=%s,dob=%s, where regno=%s"
+    user = (reno,name,age,address,dob)
+    res.execute(sql, user)
+    con.commit()
+    print("Data Update Success")
+
+
+
+def select():
+    res = con.cursor()
+    sql = "SELECT reno,name,age,address,dob from users"
+    res.execute(sql)
+    # result=res.fetchone()
+    # result=res.fetchmany(2)
+    result = res.fetchall()
+    print(tabulate(result, headers=["regno", "name", "age", "address","dob"]))
+
+
+def delete(id):
+    res = con.cursor()
+    sql = "delete from users where id=%s"
+    user = (regno,)
+    res.execute(sql, user)
+    con.commit()
+    print("Data Delete Success")
+
+
+
+while True:
+    print("1.Insert Data")
+    print("2.Update Data")
+    print("3.Select Data")
+    print("4.Delete Data")
+    print("5.Exit")
+    choice = int(input("Enter Your Choice : "))
+    if choice == 1:
+        regno=int(imput("Enter registerno:"))
+        name = input("Enter Name : ")
+        age = input("Enter Age : ")
+        address = input("Enter address : ")
+        dob = int(input("Enter dob:"))
+        insert(reno,name,age,address,dob)
+    elif choice == 2:
+        regno = input("Enter The registerno : ")
+        name = input("Enter Name : ")
+        age = input("Enter Age : ")
+        address = input("Enter address: ")
+        dob = int(input("enter dob :"))
+        update(reno,name,age,address,dob)
+    elif choice == 3:
+        select()
+    elif choice == 4:
+        id = input("Enter The Id to Delete : ")
+        delete(id)
+    elif choice == 5:
+        quit()
+    else:
+        print("Invalid Selection . Please Try Again !")
+
